@@ -1,0 +1,360 @@
+<div class="bg-beige mx-auto mt-5" #templateRef>
+
+
+
+
+
+  <div class="container-fluid">
+    <div class="row" *ngIf=" ImageLink.length > 0">
+      <div class="col-md-4 p-2" *ngFor="let content of ImageLink; let i = index">
+        <a class="nav-link image-gallery">
+          <img class="img w-100 " [src]="content.thumb" />
+          <div class="text-title"><span>{{content.title}}</span></div>
+          <div class="description" [innerHTML]="content.caption">
+          </div>
+        </a>
+
+        <a (click)="open(i,' ')" class="image-gallery">
+          <img class="img w-100 " [src]="content.thumb" />
+
+
+
+        </a>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="dropdown mx-auto" (mouseleave)="cI=null;cJ=null">
+    <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+      data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="select text size">
+      <img src="../assets/text.png" alt="" height="28" />
+    </button>
+    <div class="dropdown-menu p-0 " aria-labelledby="dropdownMenuButton"
+      style="height: 180px; width: 180px; position: relative; border-radius: 0 !important;">
+
+      <div class="d-flex" *ngFor="let i of arr">
+        <div class="row mx-0 px-0" *ngFor="let j of arr">
+
+          <div class="p-0 m-0 table-square border-right border-top" (mouseover)="cI=i;cJ=j"
+            [ngClass]="(cI>=i&& cJ>=j) ? 'bg-danger':''" (click)="selJ=j;selI=i"></div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+  <div class="p-1" style="position: relative;">
+    <!-- <div class="p-1"  id="resizer" style="position: absolute; top: 0;left: 0; height: 100%; width: 100%;"> 
+    (click)="activeResizing(table)"
+     
+    <table class="my-table" #table>
+      <tbody>
+        <tr *ngFor="let i of getTimes(selI)">
+          <td *ngFor="let i of getTimes(selJ)"></td>
+        </tr>
+      </tbody>
+    </table>
+    </div> -->
+    <div #resizer class="resizer-line"></div>
+
+    <table class="my-table" #table>
+      <tbody>
+        <tr *ngFor="let i of getTimes(selI)" style="position: relative;">
+          <td *ngFor="let i of getTimes(selJ)" (mousedown)="onMouseDown($event)">
+
+
+          </td>
+          <!-- <div class="col-resizer " (mousedown)="startResize($event,'col')" style="height: 120px;"></div> -->
+
+        </tr>
+      </tbody>
+    </table>
+    <div class="corner top-left" *ngIf="showCorners" (click)="changeWH(table)"></div>
+    <div class="corner top-right" *ngIf="showCorners"></div>
+    <div class="corner bottom-left" *ngIf="showCorners"></div>
+    <div class="corner bottom-right" *ngIf="showCorners"></div>
+  </div>
+  <button class="btn btn-primary" (click)="ok()"> click </button>
+
+  <special-characters-picker [showModel]="show" (closeModel)="show=false"
+    (selectSpecialChar)="selectChar($event)"></special-characters-picker>
+  <!-- <input type="text" #Flink name="sondos" />
+  <button class="btn btn-primary" (click)="loadFontLink(Flink.value)">
+    add font  
+  </button> -->
+  <div class="d-flex mx-0 mb-0 p-2 w-100 border-bottom">
+    <div class=" mx-auto row">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="" (click)="show =true"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="../assets/chars.png" alt="" height="35" />
+      </button>
+
+    </div>
+    <!-- <div class="dropdown mx-auto">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="../assets/font (1).png" alt="" height="28" />
+        speacil
+      </button>
+      <div class="dropdown-menu " style="width: 500px;" aria-labelledby="dropdownMenuButton">
+        <div class=" row w-100">
+          <div *ngFor="let char of chars" class="col"><button class="btn">{{char}}</button></div>
+        </div>
+      </div>
+    </div> -->
+
+
+    <div class=" mx-auto row" style="position: relative">
+      <img src="./../assets/icons8-nerd-64.png" (click)="toggled = !toggled" class="m-auto  " alt="" height="30">
+      <div (mouseleave)="toggled = false" style="position: absolute; left: -100%; top: 100%;  z-index: 1; ">
+        <emoji-picker [(ngModel)]="message" [emojiPickerIf]="toggled" [emojiPickerDirection]="'top'"
+          (mouseleave)="toggled = false" (emojiPickerSelect)="addEmoji($event)"></emoji-picker>
+      </div>
+    </div>
+    <div class="dropdown mx-auto">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="select text style">
+        <img src="../assets/italic.png" height="24" alt="" />
+      </button>
+      <div class="dropdown-menu fixed-height" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let fStyle of fontStyles; let i=index" class="px-2 py-2 btn btn-anchor d-block "
+          [ngClass]="i!= fontStyles.length-1 ? 'border-bottom':''" (click)="selectFontStyle(fStyle)">
+          <span> {{ fStyle }}</span>
+        </a>
+      </div>
+    </div>
+
+
+    <div class="d-flex mx-auto px-0 " style="width: 80px ;" title="select text size" data-bs-toggle="tooltip">
+      <div class="d-flex my-auto   in-de-btn " style="margin-right: auto;" (click)="fontSize=fontSize-2">
+        <span class="m-auto ">-</span>
+      </div>
+      <div class=" d-flex  px-0 ">
+        <small class="m-auto small">{{fontSize}}</small>
+      </div>
+      <div class="d-flex my-auto    in-de-btn " style="margin-left: auto;" (click)="fontSize=fontSize+2">
+        <span class="m-auto">+</span>
+      </div>
+    </div>
+
+
+    <div class="dropdown mx-auto">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="select text size">
+        <img src="../assets/text.png" alt="" height="28" />
+      </button>
+      <div class="dropdown-menu fixed-height" aria-labelledby="dropdownMenuButton"
+        style="height: 300px; overflow-y: scroll">
+        <a *ngFor="let font of fontSizes" class="px-2 py-2 btn btn-anchor d-block border-bottom"
+          (click)="selectFontSize(font)">
+          <!-- prettier-ignore -->
+
+          <span> {{ font }} px</span>
+        </a>
+        <div class="px-3 mt-2">
+          <button class="btn btn-outline-dark btn-sm w-100 "> <small>add new font</small></button>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto row" style="position: relative">
+      <button (click)="ctrlPickers['txtColor'] = !ctrlPickers['txtColor']" class="btn btn-popover m-auto"
+        data-bs-toggle="tooltip" data-bs-placement="top" title="select text color">
+        <fa-icon [icon]="faPen" (click)="openColorPicker('txtColor')" style="color: {{ txtColor }}"
+          class="icons-sz m-auto"></fa-icon>
+      </button>
+      <div style="position: relative" (mouseleave)="ctrlPickers['txtColor'] = false">
+        <color-sketch *ngIf="ctrlPickers['txtColor']" [(ngModel)]="txtColor"
+          style="position: absolute; z-index: 999999999; margin: auto"
+          (onChangeComplete)="selectTxtColor($event)"></color-sketch>
+      </div>
+    </div>
+
+    <div class="dropdown mx-auto">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="select font weight">
+        <img src="../assets/bold-text-option.png" alt="" height="24" />
+      </button>
+      <div class="dropdown-menu fixed-height" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let tw of fontWeights; let i =index" class="px-2 py-2 btn btn-anchor d-block"
+          [ngClass]="i!= fontWeights.length-1 ? 'border-bottom':''" (click)="makeBold(tw)">
+          <span> {{ tw }}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="dropdown mx-auto">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="select text decoration">
+        <img src="../assets/underline.png" alt="" height="25" />
+      </button>
+      <div class="dropdown-menu fixed-height" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let text of textDecorations; let i =index" class="px-2 py-2 btn btn-anchor d-block"
+          [ngClass]="i!= textDecorations.length-1 ? 'border-bottom':''" (click)="selectTextDecoration(text.style)">
+          <span> {{ text.name }}</span>
+        </a>
+      </div>
+    </div>
+    <div class="dropdown mx-auto">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" title="select text aligment" aria-haspopup="true" aria-expanded="false">
+        <img src="../assets/left-text-alignment-option.png" alt="" height="25" />
+      </button>
+      <div class="dropdown-menu fixed-height" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let text of textAligning; let i =index" [ngClass]="i!= textAligning.length-1 ? 'border-bottom':''"
+          class="px-2 py-2 btn btn-anchor d-block" (click)="selectTextAlign(text.style)">
+          <div>{{ text.name }}</div>
+        </a>
+      </div>
+    </div>
+    <div class="dropdown mx-auto">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" title="select text transformation" aria-haspopup="true" aria-expanded="false">
+        <img src="../assets/uppercase-interface-button.png" alt="" height="28" />
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let text of textTransformations" class="px-2 py-2 btn btn-anchor d-block"
+          (click)="selectTextTransformation(text.className)">
+          <span [ngClass]="text.className"> {{ text.name }}</span>
+        </a>
+      </div>
+    </div>
+    <!-- <div class="dropdown mx-auto">
+      <button
+        class="btn btn-popover dropdown-toggle editor-btn"
+        type="button"
+        id="dropdownMenuButton"
+         data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <img src="../assets/margin.png" alt="" height="28" />
+      </button>
+      <div
+        class="dropdown-menu"
+        aria-labelledby="dropdownMenuButton"
+        style="height: 300px; overflow-y: scroll"
+      >
+        <a
+          *ngFor="let flex of flexBox"
+          class="px-2 py-2 btn btn-anchor d-block text-dark"
+          (click)="selectFlexBox(flex.className)"
+        >
+          <span > {{ flex.name }}</span>
+        </a>
+      </div>
+    </div> -->
+    <div class="dropdown mx-auto">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="../assets/file.png" alt="" height="28" />
+      </button>
+      <div class="dropdown-menu fixed-height" aria-labelledby="dropdownMenuButton">
+        <div class="form-group px-2 pt-2">
+          <input type="text" class="form-control" placeholder="class name .." #classInput
+            (keyup.enter)="addClass(classInput)" name="ok" />
+
+          <small class="text-danger" *ngIf="classIsAvailableError">class already added</small>
+        </div>
+        <div class="small text-dark alert-info py-2 pl-3">added classes</div>
+        <a *ngFor="let addedClass of addedClasses" class="px-2 py-2 btn btn-anchor d-block"
+          (click)="selectClass(addedClass)">
+          <span [ngClass]="addedClass"> {{ addedClass }}</span>
+        </a>
+      </div>
+    </div>
+    <div class="dropdown mx-auto">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" title="select text line height" aria-haspopup="true" aria-expanded="false">
+        <img src="../assets/line.png" alt="" height="28" />
+      </button>
+      <div class="dropdown-menu fixed-height" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let textLH of textLineHeights" class="px-2 py-2 btn btn-anchor d-block border-bottom"
+          (click)="selectTextHeight(textLH)">
+          <!-- prettier-ignore -->
+
+          <span> {{ textLH }} px</span>
+        </a>
+        <div class="px-3 mt-2">
+          <button class="btn btn-outline-success btn-sm w-100 ">add new font</button>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto row" style="position: relative">
+      <button (click)="ctrlPickers['bgColor'] = !ctrlPickers['bgColor']" class="btn btn-popover m-auto"
+        data-bs-toggle="tooltip" data-bs-placement="top" title="This is a tooltip">
+        <!-- <fa-icon
+          [icon]="faFillDrip"
+          style="color: {{ bgColor }}"
+          class="icons-sz m-auto"
+        ></fa-icon> -->
+        <img src="../assets/icons8-fill-color-48.png" alt="" height="30">
+      </button>
+      <div style="position: relative" (mouseleave)="ctrlPickers['bgColor'] = false">
+        <color-sketch *ngIf="ctrlPickers['bgColor']" [(ngModel)]="bgColor"
+          style="position: absolute; z-index: 999; right: -80%"
+          (onChangeComplete)="selectBgColor($event)"></color-sketch>
+      </div>
+    </div>
+
+    <div class="dropdown mx-auto">
+      <button class="btn btn-popover dropdown-toggle editor-btn" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="../assets/shadow (3).png" alt="" height="28" />
+      </button>
+      <div class="dropdown-menu fixed-height px-0" aria-labelledby="dropdownMenuButton">
+        <div class="row mx-0 color-pallette px-0">
+          <div class="text-center mx-auto" *ngFor="let color of colors">
+            <button class="circle border" [ngClass]="color.bg" (click)="selectShadowColor(color.shadow)"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <button (click)="addList()" class="">add li</button> -->
+
+    <div class="mx-auto">
+      <button (click)="showHtml()" class="btn editor-btn">
+        <img src="../assets/html-file-extension-interface-symbol.png" alt="" height="30" class="" />
+      </button>
+      <button (click)="showText()" class="btn editor-btn">
+        <img src="../assets/search.png" alt="" height="30" class="" />
+      </button>
+    </div>
+    <div class="mx-auto">
+      <button (click)="removeAllStyle()" class="btn editor-btn">
+        <img src="../assets/remove.png" alt="" height="20" class="" />
+      </button>
+    </div>
+  </div>
+
+  <div #textEditor contenteditable="true" class="h-800px p-2 mt-0" type="input" name="oo"></div>
+
+
+  <button class="btn btn-primary w-100" (click)="get('make','model')">ggggggggggggggggggggggggget</button>
+</div>

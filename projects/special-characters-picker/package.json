@@ -1,0 +1,35 @@
+{
+  "name": "special-characters-picker",
+  "version": "0.1.6",
+  "peerDependencies": {
+    "@angular/common": "^15.2.0",
+    "@angular/core": "^15.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.2.3"
+
+  },
+  
+  "sideEffects": false,
+  "description": "This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0 By [Sondos Marashdeh](https://www.linkedin.com/in/sondos-marashdeh-b64806206/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sondos Marashdeh <sondosmarashdeh360@gmail.com> (https://www.linkedin.com/in/sondos-marashdeh-b64806206/)",
+  "license": "MIT",
+  "keywords": [
+    "specail characters picker",
+    "specail characters",
+    "characters picker",
+    "chars-picker",
+    "characters picker npm",
+    "characters picker angular",
+    "angular specail characters picker",
+    "npm specail characters picker",
+    "chars picker ",
+    "specail-characters-picker"
+  ]
+}

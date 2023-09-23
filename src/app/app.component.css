@@ -1,0 +1,219 @@
+:host::ng-deep popover-content::ng-deep .arrow {
+  left: 45% !important;
+  right: 45% !important;
+}
+
+:host::ng-deep popover-content::ng-deep .popover-header {
+  color: #000 !important;
+  font-size: 13px !important;
+  /* background-color: #00000000; */
+}
+
+.btn-anchor {
+  font-size: 12px !important;
+}
+
+.btn-anchor:hover {
+  background-color: #eee;
+}
+
+:host::ng-deep popover-content::ng-deep .popover-body {
+  padding-right: 0 !important;
+  text-align: left !important;
+  padding-left: 0 !important;
+}
+
+.btn-popover {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.circle {
+  height: 25px;
+  width: 25px;
+  border-radius: 12.5px;
+  margin: 1px;
+}
+
+.color-pallette {
+  width: 220px;
+}
+
+.editor-btn {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.editor-btn fa-icon {
+  font-size: 19px !important;
+}
+
+.hiddenInput {
+  visibility: hidden;
+  width: 0px !important;
+  height: 0px !important;
+}
+
+.icons-sz {
+  font-size: 22px;
+}
+
+.fixed-height {
+  max-height: 200px;
+  overflow-y: scroll
+}
+
+.emoji-picker {
+  transform: none !important;
+}
+
+emoji-picker emoji-picker {
+  transform: none !important;
+}
+
+emoji-picker>emoji-picker {
+  transform: none !important;
+}
+
+emoji-picker:nth-of-type(2) {
+  transform: none !important;
+}
+
+
+.in-de-btn {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: #e5e5e5;
+  font-size: 13px;
+
+}
+
+.in-de-btn:hover {
+  background-color: #c4c3c3;
+  font-weight: bold;
+}
+
+/*table builder css*/
+.table-square {
+  width: 18px;
+  height: 18px;
+}
+
+.border-right{
+  border-right: 1px solid #b5b5b5;
+
+}
+
+.border-top{
+  border-top: 1px solid #b5b5b5;
+
+}
+.resizing{
+  border: 2px solid #537bf260;
+}
+  
+.corner {
+  width: 10px;
+  height: 10px;
+  background-color: #6688eed1;
+  position: absolute;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+.table > :not(caption) > * > * {
+ 
+  background-color: #ffffff00 !important;
+}
+
+.my-table{
+  
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+
+}
+
+td{
+  border-top:  1px solid #bbbbbb;
+  border-right:  1px solid #bbbbbb;
+  border-bottom:  1px solid #bbbbbb;
+  width: auto;
+  height: 40px;
+
+
+}
+td:first-child{
+  border: 1px solid #bbbbbb;
+}
+
+
+
+table tr{
+  position: relative;
+}
+table tr .resizer-col {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: col-resize;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+table tr .col-resizer, table tr .row-resizer {
+  position: absolute;
+  width: 15px;
+  height: 100%;
+  top:0;
+  bottom: 0;
+  cursor: col-resize;
+}
+
+table tr .col-resizer {
+  top: 0;
+  right: -3px;
+}
+
+table tr .row-resizer {
+  bottom: -3px;
+  left: 0;
+}
+
+table tr:hover,  tr:hover {
+  border: 1px dashed #000;
+  cursor: col-resize;
+
+}
+.resizer-line {
+  position: absolute;
+  background: rgba(0,0,0,0.5);
+  width: 2px;
+  height: 100%;
+  display: none;
+}

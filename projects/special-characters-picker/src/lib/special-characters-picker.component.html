@@ -1,0 +1,144 @@
+<div class="modal" tabindex="-1" role="dialog" #myModal id="myModal" (click)="checkStatus($event)">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Special Characters</h5>
+        <div type="button" class="close btn text-muted" (click)="close()" aria-label="Close">
+          <span aria-hidden="true" class="h4">&times;</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="px-3 mb-3 mt-2">
+            <label class="small">Search</label>
+            <input type="text" [(ngModel)]="searchText" name="searchText" (input)="search()" class="form-control">
+          </div>
+          <div class="row px-0 mx-0">
+            <div class="col-3">
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active pt-0" id="v-pills-all-tab" data-bs-toggle="pill" href="#v-pills-all"
+                  role="tab" aria-controls="v-pills-all" aria-selected="true"> <span
+                    *ngIf="chars.filtered">Filtered</span>
+                  <span *ngIf="!chars.filtered">All</span></a>
+                <a class="nav-link " id="v-pills-currencies-tab" data-bs-toggle="pill" href="#v-pills-currencies"
+                  role="tab" aria-controls="v-pills-currencies" aria-selected="true">Currency</a>
+                <a class="nav-link" id="v-pills-text-tab" data-bs-toggle="pill" href="#v-pills-text" role="tab"
+                  aria-controls="v-pills-text" aria-selected="false">Text</a>
+                <a class="nav-link" id="v-pills-quotations-tab" data-bs-toggle="pill" href="#v-pills-quotations"
+                  role="tab" aria-controls="v-pills-quotations" aria-selected="false">Quotations</a>
+                <a class="nav-link" id="v-pills-math-tab" data-bs-toggle="pill" href="#v-pills-math" role="tab"
+                  aria-controls="v-pills-math" aria-selected="false">Mathematical</a>
+                <a class="nav-link" id="v-pills-latin-tab" data-bs-toggle="pill" href="#v-pills-latin" role="tab"
+                  aria-controls="v-pills-latin" aria-selected="false">Extended Latin</a>
+                <a class="nav-link" id="v-pills-symbols-tab" data-bs-toggle="pill" href="#v-pills-symbols" role="tab"
+                  aria-controls="v-pills-symbols" aria-selected="false">Symbols</a>
+                <a class="nav-link" id="v-pills-arrows-tab" data-bs-toggle="pill" href="#v-pills-arrows" role="tab"
+                  aria-controls="v-pills-arrows" aria-selected="false">Arrows</a>
+              </div>
+            </div>
+
+            <!-- Tabs content -->
+            <div class="col-9">
+
+              <div class="tab-content px-0" id="v-pills-tabContent">
+
+                <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel"
+                  aria-labelledby="v-pills-all-tab">
+                  <div class=" row h-500 px-0 mx-0">
+                    <ng-container *ngIf="!chars.filtered">
+                      <div *ngFor="let char of chars.all" class=" c-chars "  (click)="select(char)"   >
+                        <div class=" m-auto ">{{char}}</div>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="chars.filtered">
+                      <ng-container *ngIf="!chars.filtered.length">
+                        <u class="mt-2 text-muted f-12 small" role="alert">
+                          There is no matching charcters.</u>
+                      </ng-container>
+                      <ng-container *ngIf="chars.filtered.length">
+
+                        <div *ngFor="let char of chars.filtered" class=" c-chars "   (click)="select(char)" >
+                          <div class=" m-auto ">{{char}}</div>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade  " id="v-pills-currencies" role="tabpanel"
+                  aria-labelledby="v-pills-currencies-tab">
+                  <div class=" row h-500 px-0 mx-0">
+                    <div *ngFor="let char of chars.currencies" class=" c-chars " (click)="select(char)" >
+                      <div class=" m-auto ">{{char}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-text" role="tabpanel" aria-labelledby="v-pills-text-tab">
+                  <div class=" row h-500 px-0 mx-0">
+                    <div *ngFor="let char of chars.text" class=" c-chars " (click)="select(char)" >
+                      <div class=" m-auto ">{{char}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-quotations" role="tabpanel"
+                  aria-labelledby="v-pills-quotations-tab">
+                  <div class=" row h-500 px-0 mx-0">
+                    <div *ngFor="let char of chars.quotations" class=" c-chars " (click)="select(char)" >
+                      <div class=" m-auto ">{{char}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-math" role="tabpanel" aria-labelledby="v-pills-math-tab">
+                  <div class=" row h-500 px-0 mx-0">
+                    <div *ngFor="let char of chars.mathmatical" class=" c-chars " (click)="select(char)" >
+                      <div class=" m-auto ">{{char}}</div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="tab-pane fade" id="v-pills-latin" role="tabpanel" aria-labelledby="v-pills-latin-tab">
+
+                  <div class=" row h-500 px-0 mx-0">
+                    <div *ngFor="let char of chars.extendedLatin" class=" c-chars " (click)="select(char)" >
+                      <div class="  m-auto ">{{char}}</div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+                <div class="tab-pane fade" id="v-pills-symbols" role="tabpanel" aria-labelledby="v-pills-symbols-tab">
+
+                  <div class=" row h-500 px-0 mx-0">
+                    <div *ngFor="let char of chars.symbols" class=" c-chars " (click)="select(char)" >
+                      <div class="  m-auto ">{{char}}</div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="tab-pane fade px-0" id="v-pills-arrows" role="tabpanel"
+                  aria-labelledby="v-pills-arrows-tab">
+                  <div class=" row h-500 px-0 mx-0">
+                    <div *ngFor="let char of chars.arrows" class=" c-chars " (click)="select(char)" >
+
+                      <div class="m-auto"> {{char}}</div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
